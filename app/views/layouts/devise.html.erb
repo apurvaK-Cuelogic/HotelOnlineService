@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HotelOnlineService</title>
+    <%= csrf_meta_tags %>
+    <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Google jquery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>          
+      <script>
+      $( document ).ready(function(){
+        $(".button-collapse").sideNav();
+      })       
+    </script>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'rails.validations', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/home/index">Home</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="/home/index">Home</a></li>
+        </ul>
+    </div>
+    </nav>      
+    <%= render "/layouts/messages" %>  
+      <div class="row">
+       <div class="col l4 m6 s12 offset-m3 offset-l4">
+         <div class="card">
+           <div class="card-content">
+             <%= yield %>
+           </div>
+         </div>
+       </div>
+     </div>
+  </body>
+</html>
