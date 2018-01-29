@@ -1,7 +1,14 @@
+
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="/members/sign_in">User</a></li>
+  <li class="divider"></li>
+  <li><a href="/admin/login">Admin</a></li>
+</ul>
+
 <% if member_signed_in? %>
  <li><%= link_to "Log out", destroy_member_session_path, :method => :delete  %></li>
  <li><%= link_to "Edit Profile", edit_member_registration_path %></li>
  <%else%>
-<li><a href="/members/sign_up">Registration</a></li>
-<li><a href="/members/sign_in">Log in</a></li>
+<li><a href="/members/sign_up">User Registration</a></li>
+<li><a class="dropdown-button" href="" data-activates="dropdown1">Sign In<i class="material-icons right">arrow_drop_down</i></a></li>
 <% end %>

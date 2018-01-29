@@ -30,7 +30,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -64,4 +64,9 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true
   }
+
+  config.file_watcher = ActiveSupport::FileUpdateChecker
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  #IF u dont want to restart server
+  config.reload_classes_only_on_change = false  
 end
