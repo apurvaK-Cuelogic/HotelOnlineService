@@ -16,6 +16,17 @@
 //
 //   .status_tag { background: #6090DB; }
 
-.message{
+.inline-errors{
 	display:none;
 }
+
+.message{
+	color:red;
+	margin-left: 21.5em;
+	width: 100%;
+}
+
+select{
+display: block;
+}
+
