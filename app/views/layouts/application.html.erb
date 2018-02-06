@@ -12,6 +12,15 @@
       function makeToast(){
         document.getElementById("notice").style.visibility = "visible";
       }
+
+      $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: false // Close upon selecting a date,
+    });
      
     </script>
     <!-- Compiled and minified JavaScript -->
@@ -23,7 +32,7 @@
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">&nbsp;&nbsp;Logo</a>
+        <a class="brand-logo">&nbsp;&nbsp;<img src="../images/logo.png" alt="Logo"/></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <%= render "/layouts/header_auth" %>  
         </ul>
@@ -31,5 +40,22 @@
     </nav>      
          <%= render "/layouts/messages" %>  
     <%= yield %>
+
+    <div class="container search-block">
+      <div class="row">
+         <div class="input-field col m4">
+          <input placeholder=" " id="first_name" type="text" class="validate">
+          <label for="first_name">Select location</label>
+        </div>
+        <div class="col m2">
+          <input type="text" class="datepicker">
+        </div>
+        <div class="col m2">
+          <input type="text" class="datepicker">                
+        </div>
+        <div class="col m2"></div>
+        <div class="col m2"><button>Find Search</button></div>
+      </div>
+    </div>
   </body>
 </html>
