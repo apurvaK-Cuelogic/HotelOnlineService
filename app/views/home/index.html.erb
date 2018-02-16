@@ -1,2 +1,34 @@
-
+ 
+     <%= form_tag({:controller=> "search", :action=>"searchView"},:method=>"get")do %>
+     <div class="container search-block">
+      <div class="row">
+         <div class="input-field col m4">
+          <%= text_field :search, :name_or_location , :required => true, :placeholder => " " %>
+          <%= label_tag :name_or_location_search, 'Enter Location or Hotel Name' %>
+        </div>
+        <div class="col m2">
+          <%= label_tag :check_in, "Check in", :class => 'search-content' %>
+          <%= date_field :search, :checkin , :class => 'datepicker', :required => true, :min => Date.today, :value => Date.today %>
+          
+        </div>
+        <div class="col m2">
+          <%= label_tag :check_out, "Check out", :class => 'search-content' %>
+            <%= date_field :search, :checkout , :class => 'datepicker', :required => true, :min => Date.today+1, :value => Date.today+1  %>                
+        </div>
+        <div class="col m2">
+          <!-- <label for="check-out">No of Rooms</label>
+          <select class="icons">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">1 Room</option>
+            <option value="2">2 Rooms</option>
+            <option value="3">3 Rooms</option>
+          </select>  -->              
+        </div>
+        <div class="col m2">
+          <button type="submit" class="waves-effect waves-light btn btn-submit">SEARCH</button>
+        </div>
+      </div>
+      </div>
+      <%end%>
+   
 
