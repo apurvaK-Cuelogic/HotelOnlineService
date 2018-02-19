@@ -13,8 +13,20 @@ class SearchService
 	end
 
 	def searchRooms hotel_id
-    @booking_rooms=Room.bookingrooms(@checkinDate,@checkoutDate)
-    h = Room.room_hotel_id(hotel_id).inactive.room_id_not(@booking_rooms).uniq
-    #h = Room.joins(:hotel).where("hotels.id = :col_1 AND rooms.inactive IS NULL AND rooms.id NOT IN (:col_2)" , { col_1: hotel_id , col_2: r} ).group("rooms.id,rooms.price,rooms.no_of_bedroom").uniq    
-end
+	    @booking_rooms=Room.bookingrooms(@checkinDate,@checkoutDate)
+	    h = Room.room_hotel_id(hotel_id).inactive.room_id_not(@booking_rooms).uniq
+	end
+
+	def check_room_select
+	    flag = true
+	    @params[:room_select].each do |k,v|
+	      if v == 0.to_s
+	        flag = true
+	      else
+	        flag = false
+	        return false
+	      end
+	    end
+	    true
+  	end
 end

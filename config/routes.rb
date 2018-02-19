@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   get 'search/searchView'
 
   resources :search
+  resources :booking
+  get 'create_booking', to: 'booking#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

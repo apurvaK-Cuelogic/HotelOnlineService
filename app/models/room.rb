@@ -21,4 +21,9 @@ class Room < ApplicationRecord
 	scope :room_id_not, -> (query){ where.not( "id": query ) }
 	scope :id, ->(id){ where("id": id)}
 	scope :bookingrooms, -> (checkinDate,checkoutDate){ joins(:bookings).select("id").where('"checkinDate" BETWEEN ? AND ? OR "checkoutDate" BETWEEN ? AND ?',checkinDate,checkoutDate,checkinDate,checkoutDate)}
+
+
+	scope :booking_date, -> (date){ joins(:bookings).where("bookings.bookingDate = ? ", "#{date}" ) }
+  scope :booking_member_id, -> (member_id){ where("bookings.member_id = ? ", "#{member_id}" ) }
+  scope :checkin_checkout_eq, -> (checkin, checkout){ joins(:bookings).where("bookings.checkinDate = ? AND bookings.checkoutDate = ? ", "#{checkin}" , "#{checkout}") }
 end

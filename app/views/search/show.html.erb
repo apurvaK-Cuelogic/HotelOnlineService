@@ -1,4 +1,4 @@
-<%= form_tag({:controller=> "booking", :action=>"confirmBooking"},:method=>"get")do %>
+<%= form_tag({:controller=> "booking", :action=>"index"},:method=>"get")do %>
 <div class="container">
 	<h3>Listing Rooms</h3>
 	<table  style="width: 80%">
@@ -8,17 +8,17 @@
 	<th> Room Description  </th>
 	<th> No Of Bedroom </th>
 	</tr>
-		<% @room_res.each do |a|%>
+		<% @room_res.each do |r|%>
 			<tr>
-				<td style="padding-top: 0.5%"><%= check_box("room_select", a.id)%></td>
-				<td><%= a.room_price %></td>
-				<td><%= a.room_description %></td>
-				<td><%= a.no_of_bedrooms %></td>						
+				<td><%= check_box("room_select", r.id)%></td>
+				<td><%= r.room_price %></td>
+				<td><%= r.room_description %></td>
+				<td><%= r.no_of_bedrooms %></td>						
 			</tr>
 		<% end %>
 	</table>
 	 <%= submit_tag "Book Now", class: "btn btn-large btn-primary search-button" %>
-		
+	
 	<%= paginate @room_res %>
 </div>
-<%= end %>
+<% end %>
