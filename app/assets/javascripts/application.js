@@ -13,3 +13,18 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+function search(){
+	 var name_or_location = document.getElementById('search_name_or_location').value;
+	 var checkin = document.getElementById('search_checkin').value;
+	 var checkout = document.getElementById('search_checkout').value;
+	 var xhttp = new XMLHttpRequest();
+  	xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("results").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "/search/searchView?name_or_location="+name_or_location+"&checkin="+checkin+"&checkout="+checkout, true);
+  xhttp.send();
+}

@@ -1,1 +1,26 @@
-<h1 style="color:white;">SEARCHJJJJ</h1>
+<div class="container">
+    <% if @res.empty? %>
+		<div class="hotel_list">
+			<span>Sorry, Hotels Not found</span>
+		</div>
+    <% else %>		
+		<h3>List Of Hotels</h3>
+		<table style="text-align: center;">
+		<tr>
+		<th> Hotel Name </th>
+		<th> Location </th>
+		<th> Description  </th>
+		<th></th>
+		</tr>
+			<% @res.each do |a|%>
+				<tr>
+				<td><%= a.hotel_name %></td>
+				<td><%= a.hotel_location %></td>
+				<td><%= a.hotel_description %></td>
+				<td><%= link_to 'Show', search_path(a) %></td>
+				</tr>
+			<% end %>
+		</table>
+		<%= paginate @res %>
+	<% end%>
+</div>

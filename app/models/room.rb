@@ -1,7 +1,7 @@
 class Room < ApplicationRecord
 	belongs_to :hotel
 	has_many :images, as: :imageable, dependent: :destroy
-	has_and_belongs_to_many :bookings
+	has_and_belongs_to_many :bookings, :join_table => :bookings_rooms
 	
 	validates :hotel_id, :room_price, :room_rating, :no_of_bedrooms, presence: true 
 	
@@ -13,4 +13,12 @@ class Room < ApplicationRecord
 	validates :room_rating , :inclusion => {:in => 0..5, message:"must lie in between 0 to 5"},numericality: { only_integer: true }
 	validates :room_description, length: { maximum: 100 }
 	accepts_nested_attributes_for :images, allow_destroy: true, reject_if: proc { |attributes| attributes[:image].nil? }
+
+	#scope :checkin_checkout, -> (checkin,checkout){ joins(:bookings).where("bookings.checkinDate < ? AND bookings.checkoutDate > ?", "#{checkout}", "#{checkin}")}
+	scope :inactive, ->{where(inactive_date: nil)}
+	scope :active, ->{where.not(inactive_date: nil)}
+	scope :room_hotel_id, -> (id){ joins(:hotel).where( rooms: {"hotel_id": id })}
+	scope :room_id_not, -> (query){ where.not( "id": query ) }
+	scope :id, ->(id){ where("id": id)}
+	scope :bookingrooms, -> (checkinDate,checkoutDate){ joins(:bookings).select("id").where('"checkinDate" BETWEEN ? AND ? OR "checkoutDate" BETWEEN ? AND ?',checkinDate,checkoutDate,checkinDate,checkoutDate)}
 end

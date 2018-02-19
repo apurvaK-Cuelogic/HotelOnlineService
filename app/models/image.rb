@@ -6,8 +6,7 @@
 
 	before_save :update_image_attributes
 	 
-
-  alias_attribute :filename, :original_filename
+  #validates :image, :file_size => {:maximun => 2.0.megabytes.to_i }
 
 
 	def imageable_hotel
@@ -37,8 +36,7 @@ private
   
   def update_image_attributes
     if image.present? && image_changed?
-     #self.original_filename = image.file.original_filename
-     # self.content_type = image.file.content_type
+     
     end
   end
 end

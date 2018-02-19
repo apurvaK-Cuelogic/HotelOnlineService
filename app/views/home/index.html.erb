@@ -1,9 +1,9 @@
  
-     <%= form_tag({:controller=> "search", :action=>"searchView"},:method=>"get")do %>
+ 
      <div class="container search-block">
       <div class="row">
          <div class="input-field col m4">
-          <%= text_field :search, :name_or_location , :required => true, :placeholder => " " %>
+          <%= text_field :search, :name_or_location , :required => true, :placeholder => " " ,:onkeyup => "search()"%>
           <%= label_tag :name_or_location_search, 'Enter Location or Hotel Name' %>
         </div>
         <div class="col m2">
@@ -25,10 +25,12 @@
           </select>  -->              
         </div>
         <div class="col m2">
-          <button type="submit" class="waves-effect waves-light btn btn-submit">SEARCH</button>
+          <button type="submit" class="waves-effect waves-light btn btn-submit" onclick="search()">SEARCH</button>
         </div>
+
       </div>
       </div>
-      <%end%>
+       <div id="results"></div>
+      
    
 

@@ -15,5 +15,11 @@ class Hotel < ApplicationRecord
 
      accepts_nested_attributes_for :images, allow_destroy: true, reject_if: proc { |attributes| attributes[:image].nil? }
 
+    scope :name_location, -> (name){ where("(hotel_name ILIKE ? OR hotel_location ILIKE ?)", "#{name}%", "#{name}%")} 
+  	scope :room_inactive, -> { joins(:rooms).where(rooms: { inactive_date: nil} )}
+  	scope :room_id_not, ->  (query){ where.not( "rooms.id": query ) }
+	scope :id, ->(id){ where("id": id)}	
+
+	scope :hotelsearchResult,->(booking_rooms,name_or_location){ joins(:rooms).where.not(:rooms => {id: booking_rooms} ).where("hotel_name ILIKE ? OR hotel_location ILIKE ?","#{name_or_location}%","#{name_or_location}%").uniq}
 end
 

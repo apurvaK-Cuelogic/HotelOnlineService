@@ -10,4 +10,5 @@ class Member < ApplicationRecord
   validates :email,:uniqueness => true, format:{ with: email_regex}
   validates :mobile_no, :presence => true,:format => {with:mobile_regex}
  
+   has_many :bookings, dependent: :destroy
 end

@@ -1,0 +1,24 @@
+<%= form_tag({:controller=> "booking", :action=>"confirmBooking"},:method=>"get")do %>
+<div class="container">
+	<h3>Listing Rooms</h3>
+	<table  style="width: 80%">
+	<tr>
+	<th></th>
+	<th> Price</th>
+	<th> Room Description  </th>
+	<th> No Of Bedroom </th>
+	</tr>
+		<% @room_res.each do |a|%>
+			<tr>
+				<td style="padding-top: 0.5%"><%= check_box("room_select", a.id)%></td>
+				<td><%= a.room_price %></td>
+				<td><%= a.room_description %></td>
+				<td><%= a.no_of_bedrooms %></td>						
+			</tr>
+		<% end %>
+	</table>
+	 <%= submit_tag "Book Now", class: "btn btn-large btn-primary search-button" %>
+		
+	<%= paginate @room_res %>
+</div>
+<%= end %>
