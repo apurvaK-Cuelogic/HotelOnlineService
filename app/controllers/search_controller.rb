@@ -19,9 +19,9 @@ class SearchController < ApplicationController
        @room_res=Kaminari.paginate_array(@room_result).page(params[:page])
     end
 
-    def search_list
+    def roomSearchView
 	    @searchObj =SearchService.new(params[:name_or_location],params[:checkin],params[:checkout])
-	    if @searchObj.check_room_select
+	    if @searchObj.check_room_select params[:room_select]
 	      flash[:alert] = "Please Select Rooms For Booking"
 	      redirect_to request.referer
 	    else

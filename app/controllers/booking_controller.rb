@@ -24,26 +24,32 @@ class BookingController < ApplicationController
   end
 
   def create
-  	  puts "***************************"
-	  selected_rooms=Rails.cache.read("rooms_selected")
-	  puts "ROOM SELE",selected_rooms
-      @hotel_id=Room.select("hotel_id").where("id:?",selected_rooms.keys[0].to_i)
-
-      @roomsList=Array.new
-      selected_rooms.each do |rooms|
-      @roomsList.push(Room.find(rooms.to_i))
+      room_id = []
+      Rails.cache.read("rooms_selected").each do |key, value|
+        if value != 0.to_s     
+          room_id << key
+        end     
       end
+      room_details = Room.id(room_id).uniq  
 
-      searchRoomExist=Room.joins(:bookings).where(:bookings=>{checkinDate: Rails.cache.read("checkin"),checkoutDate: Rails.cache.read("checkout")},id:@roomsList).uniq
+      searchRoomExist=Room.joins(:bookings).where(:bookings=>{checkinDate: Rails.cache.read("checkin"),checkoutDate: Rails.cache.read("checkout")},id:room_details).uniq
           if(searchRoomExist.empty?)
 		      @newBooking=Booking.create(checkinDate: Rails.cache.read("checkin").to_s,checkoutDate: Rails.cache.read("checkout").to_s,bookingDate: Date.today.to_s,member_id: current_member.id)
-		      @newBooking.rooms << @roomsList   
-		      @hotelsList=@roomsList[0].hotel
+		      @newBooking.rooms << room_details   
+		      
 		      flash[:notice] = "Rooms booked successfully."
-			  redirect_to '/home/index'  	
+			    redirect_to '/home/index'  	
           else
                 flash[:alert]="Rooms are already booked.."
                 redirect_to '/home/index'
          end	
+
+
+       
+
+
+
+
+
   end
 end

@@ -2,24 +2,21 @@
 <h4>Booking Confirmation Details </h4>
 <h5>Hotel Details </h5>
 	<%= form_for :booking, url: create_booking_path, method: "get" do |f| %>	
+		<% @hotel_details.each do |a|%>
 		<div>
 			<span>Hotel Name : &nbsp;&nbsp;&nbsp;</span>
 			<span>
-				<% @hotel_details.each do |a|%>
 					<%= a.hotel_name %>
-				<% end %>
 			</span>
 		</div>
 
 		<div>
 			<span>Hotel Location : &nbsp;</span>
 			<span>
-				<% @hotel_details.each do |a|%>
 					<%= a.hotel_location %>
-				<% end %>
 			</span>
 		</div>
-
+		<% end %>
 		<h5>Rooms Details </h5>
 		<table style="text-align: center;">
 		<tr>

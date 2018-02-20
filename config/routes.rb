@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
   get 'search/searchView'
+  get 'search/roomSearchView'
 
   resources :search
   resources :booking

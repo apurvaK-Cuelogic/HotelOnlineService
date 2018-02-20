@@ -17,13 +17,13 @@ class SearchService
 	    h = Room.room_hotel_id(hotel_id).inactive.room_id_not(@booking_rooms).uniq
 	end
 
-	def check_room_select
-	    flag = true
-	    @params[:room_select].each do |k,v|
-	      if v == 0.to_s
-	        flag = true
+	def check_room_select room_select
+   		p = true
+	    room_select.each do |key,value|
+	      if value == 0.to_s
+	        p = true
 	      else
-	        flag = false
+	        p = false
 	        return false
 	      end
 	    end
