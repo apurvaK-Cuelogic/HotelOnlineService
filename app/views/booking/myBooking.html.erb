@@ -1,0 +1,32 @@
+<div class="container">
+
+	<div>
+
+	<%= search_form_for @q, url: view_booking_details_path, method: "get" do |f| %>
+	  	<%= f.label :bookingDate_eq, "Booking Date" %>
+	  	<%= f.date_field :bookingDate_eq %>
+	    <%= f.submit %>
+	<% end %>
+	</div>
+	<div>
+		<% if @booking_details.empty? %>
+		<h6>No Bookings done yet</h6>
+		<% else %>
+			<table>
+			<tr>
+			<th> Booking Date</th>
+			<th> Checkin  </th>
+			<th> Checkout </th>
+			</tr>
+				<% @booking_details.each do |booking| %>
+					<tr>
+						<td><%=booking.bookingDate%></td>
+						<td><%= booking.checkinDate%></td>
+						<td><%= booking.checkoutDate%></td>						
+					</tr>
+				<% end %>
+			<% end %>
+			</table>
+		<%= paginate @booking_details %>	
+	</div>
+</div>

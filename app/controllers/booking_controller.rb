@@ -36,20 +36,18 @@ class BookingController < ApplicationController
           if(searchRoomExist.empty?)
 		      @newBooking=Booking.create(checkinDate: Rails.cache.read("checkin").to_s,checkoutDate: Rails.cache.read("checkout").to_s,bookingDate: Date.today.to_s,member_id: current_member.id)
 		      @newBooking.rooms << room_details   
-		      
+		      BookingMailer.booking_confirmation(Member.find(current_member.id)).deliver_now
 		      flash[:notice] = "Rooms booked successfully."
 			    redirect_to '/home/index'  	
           else
                 flash[:alert]="Rooms are already booked.."
                 redirect_to '/home/index'
          end	
+  end
 
-
-       
-
-
-
-
-
+  def myBooking
+    @q = Booking.ransack(params[:q])
+    @result = @q.result(distinct: true).where(member_id: current_member.id)
+    @booking_details = Kaminari.paginate_array(@result).page(params[:page]).per(2)
   end
 end

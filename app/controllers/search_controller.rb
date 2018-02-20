@@ -9,7 +9,7 @@ class SearchController < ApplicationController
 		Rails.cache.write("checkout",@checkout)
 		@search_service_obj = SearchService.new(@name_or_location,@checkin,@checkout)
 		@hotel_result = @search_service_obj.searchHotel
-		@res = Kaminari.paginate_array(@hotel_result).page(params[:page]).per(1)
+		@res = Kaminari.paginate_array(@hotel_result).page(params[:page]).per(4)
 	end
 
     def show 

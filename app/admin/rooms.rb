@@ -1,5 +1,5 @@
 ActiveAdmin.register Room do
-	permit_params :room_price, :room_rating, :no_of_bedrooms, :hotel_id,:images_attributes
+	permit_params :room_price, :room_rating, :no_of_bedrooms,:inactive_date, :hotel_id,:images_attributes
 
 	form do |f|
     f.inputs do
@@ -10,6 +10,7 @@ ActiveAdmin.register Room do
       f.input :room_rating, as: :number, min: 0,max: 5
       f.input :room_description
       f.input :no_of_bedrooms, as: :select, multiple: false, collection: ['1','2','3']
+      f.input :inactive_date
       f.has_many :images do |img|
         img.inputs "IMAGES" do
           img.input :image,as: :file,multiple: true, :hint => img.object.image.present? ? image_tag(img.object.image.url(),:width => "100",:height => "100"): content_tag(:span, "no image added")
