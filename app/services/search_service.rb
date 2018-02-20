@@ -6,8 +6,6 @@ class SearchService
 	end
 
 	def searchHotel
-		#room_booked = Room.select("id").checkin_checkout(@checkin,@checkout)
-	#	hotel_list = Hotel.joins(:rooms).name_location(@name_or_location).room_inactive.room_id_not(room_booked).uniq
 		@booking_rooms=Room.bookingrooms(@checkin,@checkout)
 		@availableRooms=Hotel.hotelsearchResult(@booking_rooms,@name_or_location)
 	end

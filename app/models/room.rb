@@ -26,4 +26,8 @@ class Room < ApplicationRecord
 	scope :booking_date, -> (date){ joins(:bookings).where("bookings.bookingDate = ? ", "#{date}" ) }
   scope :booking_member_id, -> (member_id){ where("bookings.member_id = ? ", "#{member_id}" ) }
   scope :checkin_checkout_eq, -> (checkin, checkout){ joins(:bookings).where("bookings.checkinDate = ? AND bookings.checkoutDate = ? ", "#{checkin}" , "#{checkout}") }
+
+ 	def self.delete_inactive_rooms
+   		Room.where("inactive_date < NOW() - INTERVAL '30 DAY'").destroy_all
+	end
 end

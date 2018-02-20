@@ -2,7 +2,6 @@ class BookingService
 
   def initialize params
     @params=params
-    puts "BOOKING PARAMS ",params
   end
 
   def room_details
@@ -12,8 +11,7 @@ class BookingService
         room_id << key
       end     
     end
-    @room_details = Room.id(room_id).uniq 
-    puts "ROOM DETAILS",@room_details.inspect    
+    @room_details = Room.id(room_id).uniq     
     @room_details
   end
 

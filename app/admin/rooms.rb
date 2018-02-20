@@ -32,8 +32,7 @@ ActiveAdmin.register Room do
       else
         render 'new'
       end
-    end  ## new create
-
+    end  
     def update
         @room = Room.find(params[:id])  
            
@@ -42,7 +41,7 @@ ActiveAdmin.register Room do
         else
           render 'edit'
         end
-      end   ## new update
+      end  
 
        private
   
