@@ -4,7 +4,6 @@ class SearchController < ApplicationController
 		@name_or_location = params[:name_or_location]
 		@checkin = params[:checkin]
 		@checkout = params[:checkout]
-
 		Rails.cache.write("checkin",@checkin)
 		Rails.cache.write("checkout",@checkout)
 		@search_service_obj = SearchService.new(@name_or_location,@checkin,@checkout)

@@ -1,34 +1,56 @@
 <div class="container">
-<h4>Booking Confirmation Details </h4>
-<h5>Hotel Details </h5>
-	<%= form_for :booking, url: create_booking_path, method: "get" do |f| %>	
-		<% @hotel_details.each do |a|%>
-		<div>
-			<span>Hotel Name : &nbsp;&nbsp;&nbsp;</span>
-			<span>
-					<%= a.hotel_name %>
-			</span>
-		</div>
+	<div class="row">
+	<ul class="collection with-header">
+		<li class="collection-header"><h4>Booking Confirmation Details</h4></li>
+		<li>
+		    <div class="col s12" style="padding:0px;">
+		      <ul class="tabs" style="border-bottom:1px solid #efefef;">
+		        <li class="tab col s6"><a href="#test1">Hotel Details</a></li>
+		        <li class="tab col s6"><a class="active" href="#test2">Room Details</a></li>
+		      </ul>
+		    </div>
+		</li>
 
-		<div>
-			<span>Hotel Location : &nbsp;</span>
-			<span>
-					<%= a.hotel_location %>
-			</span>
-		</div>
-		<% end %>
-		<h5>Rooms Details </h5>
-		<table style="text-align: center;">
-		<tr>
+		<li>
+			<div id="test1" class="col s12">
+				<table style="text-align: center;margin-left: 10%;width:83%;">
+					<tr style="border-bottom:1px solid black;">
+					<th> Hotel Name </th>
+					<th> Hotel Location  </th>
+					<th style="width: 30%"> Hotel Description  </th>
+					<th style="width: 20%"> Hotel Rating </th>
+					</tr>
+						<% @hotel_details.each do |a|%>
+								<tr>
+								<td><%= a.hotel_name %></td>
+								<td><%= a.hotel_location %></td>
+								<td><%= a.hotel_description %></td>
+								<td><%= a.hotel_rating %></td>
+								
+								</tr>				
+						<% end %>			
+				</table>	
+				<button style="margin: 1% 0% 1.5% 43%;padding: 0.8%;width: 11%;"><%= link_to 'Cancel',home_index_path %></button>
+			</div>
+		</li>
+	
+		<li>
+		<div id="test2" class="col s12">
+			<%= form_for :booking, url: create_booking_path, method: "get" do |f| %>
+			<table style="text-align: center;margin-left: 10%;width:83%;">
+		<tr style="border-bottom:1px solid black;">
+		<th> Room Price  </th>
+		<th> Room Rating  </th>
 		<th style="width: 30%"> Room Description  </th>
-		<th style="width: 20%"> No Of Bedroom </th>
-		<th> Price  </th>
+		<th style="width: 20%"> No Of Bedrooms </th>
 		</tr>
 			<% @rooms_details.each do |details|%>
 					<tr>
+					<td><%= details.room_price %></td>
+					<td><%= details.room_rating %></td>
 					<td><%= details.room_description %></td>
 					<td><%= details.no_of_bedrooms %></td>
-					<td><%= details.room_price %></td>
+					
 					</tr>				
 			<% end %>		
 		<tr>
@@ -38,6 +60,20 @@
 		</tr>
 		
 		</table>
-		<%= f.submit "Book Rooms", data: { confirm: 'Confirm?' } %>
-	<% end %>
+		<%= f.submit "Book Rooms", data: { confirm: 'Confirm?' }, :id => 'bookRooms' %>
+		<button id="cancelBookRooms"><%= link_to 'Cancel',home_index_path %></button>
+		<% end %>
+		</div>
+		</li>
+	</ul>
+	
 </div>
+</div>
+
+
+
+
+
+
+
+				

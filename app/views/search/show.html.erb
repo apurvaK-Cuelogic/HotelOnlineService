@@ -1,24 +1,31 @@
 <%= form_tag({:controller=> "search", :action=>"roomSearchView"},:method=>"get")do %>
 <div class="container">
-	<h3>Listing Rooms</h3>
-	<table  style="width: 80%">
-	<tr>
-	<th></th>
-	<th> Price</th>
-	<th> Room Description  </th>
-	<th> No Of Bedroom </th>
-	</tr>
-		<% @room_res.each do |r|%>
-			<tr>
-				<td><%= check_box("room_select", r.id)%></td>
-				<td><%= r.room_price %></td>
-				<td><%= r.room_description %></td>
-				<td><%= r.no_of_bedrooms %></td>						
+	<ul class="collection with-header">
+		<li class="collection-header"><h4>List Of Rooms</h4></li>
+		<li class="collection-item">
+			<table style="text-align: center;">
+			<tr style="border-bottom: 1px solid black;">
+			<th style="width:10%"></th>
+			<th> Price</th>
+			<th> Room Description  </th>
+			<th> No Of Bedroom </th>
+			<th> Room Rating </th>
 			</tr>
-		<% end %>
-	</table>
-	 <%= submit_tag "Book Now", class: "btn btn-large btn-primary search-button" %>
-	
-	<%= paginate @room_res %>
+				<% @room_res.each do |r|%>
+					<tr id="hotel_details_row">
+						<td><%= check_box("room_select", r.id)%></td>
+						<td><%= r.room_price %></td>
+						<td><%= r.room_description %></td>
+						<td><%= r.no_of_bedrooms %></td>
+						<td><%= r.room_rating %></td>						
+					</tr>
+				<% end %>
+			</table>
+		</li>
+		<li class="collection-item" style="text-align: center;">
+	 		<%= submit_tag "Book Now", class: "btn btn-large btn-primary search-button" %>
+		</li>
+		<%= paginate @room_res %>
+	</ul>
 </div>
 <% end %>
