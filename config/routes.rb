@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'search/searchView'
   get 'search/roomSearchView'
 
+  get 'search/my_api/1'
+  
+
   resources :search
   resources :booking
   get 'create_booking', to: 'booking#create'

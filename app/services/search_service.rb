@@ -1,7 +1,7 @@
+# SearchService
 class SearchService
 	def initialize(name_or_location,checkin,checkout)
 		@name_or_location = name_or_location
-		puts @checkin
 		@checkin = checkin
 		@checkout = checkout
 	end
@@ -12,7 +12,7 @@ class SearchService
 	end
 
 	def searchRooms hotel_id
-		@checkin= Rails.cache.read("checkin")
+		@checkin= Rails.cache.read('checkin')
 		@checkout= Rails.cache.read("checkout")
 	    @booking_rooms=Room.bookingrooms(@checkin,@checkout)
 	    h = Room.room_hotel_id(hotel_id).inactive.room_id_not(@booking_rooms).uniq

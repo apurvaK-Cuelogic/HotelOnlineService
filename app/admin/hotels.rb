@@ -46,6 +46,16 @@ ActiveAdmin.register Hotel do
 	      end
 	    end   ## new update
 
+	    def my_api
+	      @hotel = Hotel.find(params[:id])  
+	      render json: {reset:true}   
+	      # if @hotel.update_attributes(hotelImg_params)
+	      #   redirect_to [:admin, @hotel]
+	      # else
+	      #   render 'edit'
+	      # end
+	    end   ## new update
+
 	     private
   
 		def hotel_params

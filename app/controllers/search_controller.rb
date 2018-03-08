@@ -16,7 +16,17 @@ class SearchController < ApplicationController
        @searchObj=SearchService.new(params[:name_or_location],params[:checkin],params[:checkout])
        @room_result=@searchObj.searchRooms(hotel_id)
        @room_res=Kaminari.paginate_array(@room_result).page(params[:page])
+
+     if params[:test] == 'true'
+     	render json: {rooms: @room_res}   
+      end
     end
+
+    # get 'hotels/my_api'
+    def my_api
+      render json: {reset:true}   
+    end
+
 
     def roomSearchView
 	    @searchObj =SearchService.new(params[:name_or_location],params[:checkin],params[:checkout])
